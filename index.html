@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="StudentTools PH - Free calculators for Filipino students."
+  >
+
+  <title>StudentTools PH</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<nav class="navbar">
+
+  <div class="logo">
+    StudentTools <span>PH</span>
+  </div>
+
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#calculators">Calculators</a>
+    <a href="#history">History</a>
+    <a href="#about">About</a>
+  </div>
+
+  <div class="nav-actions">
+
+    <button
+      id="wallpaperBtn"
+      class="nav-icon-btn"
+      type="button"
+      title="Wallpaper"
+    >
+      🖼️
+    </button>
+
+    <button
+      id="darkModeBtn"
+      class="nav-icon-btn"
+      type="button"
+      title="Dark mode"
+    >
+      🌙
+    </button>
+
+    <button
+      id="accountBtn"
+      class="account-button"
+      type="button"
+    >
+      👤 Login
+    </button>
+
+  </div>
+
+</nav>
+
+
+<!-- =========================
+     WALLPAPER MENU
+========================= -->
+
+<div id="wallpaperMenu" class="floating-menu hidden">
+
+  <h3>Website Background</h3>
+
+  <button onclick="setWallpaper('default')">
+    Default
+  </button>
+
+  <button onclick="setWallpaper('ocean')">
+    Ocean Blue
+  </button>
+
+  <button onclick="setWallpaper('purple')">
+    Soft Purple
+  </button>
+
+  <button onclick="setWallpaper('sunset')">
+    Soft Sunset
+  </button>
+
+  <button onclick="setWallpaper('mint')">
+    Mint
+  </button>
+
+  <label class="upload-wallpaper">
+    📤 Use Your Own Picture
+    <input
+      type="file"
+      id="wallpaperUpload"
+      accept="image/*"
+    >
+  </label>
+
+  <button onclick="removeCustomWallpaper()">
+    Reset Background
+  </button>
+
+</div>
+
+
+<!-- =========================
+     ACCOUNT MODAL
+========================= -->
+
+<div id="accountModal" class="modal hidden">
+
+  <div class="modal-box">
+
+    <button
+      class="modal-close"
+      onclick="closeAccountModal()"
+      type="button"
+    >
+      ×
+    </button>
+
+    <div id="loginPanel">
+
+      <h2>👤 Login</h2>
+
+      <p class="modal-description">
+        Login to save your calculation history across devices.
+      </p>
+
+      <label for="loginEmail">
+        Email
+      </label>
+
+      <input
+        id="loginEmail"
+        type="email"
+        placeholder="you@example.com"
+        autocomplete="email"
+      >
+
+      <label for="loginPassword">
+        Password
+      </label>
+
+      <input
+        id="loginPassword"
+        type="password"
+        placeholder="Password"
+        autocomplete="current-password"
+      >
+
+      <button
+        class="calculate-button"
+        onclick="loginUser()"
+        type="button"
+      >
+        Login
+      </button>
+
+      <button
+        class="secondary-button"
+        onclick="showRegister()"
+        type="button"
+      >
+        Create Account
+      </button>
+
+      <button
+        class="text-button"
+        onclick="resetPassword()"
+        type="button"
+      >
+        Forgot password?
+      </button>
+
+      <p id="loginMessage" class="account-message"></p>
+
+    </div>
+
+
+    <div id="registerPanel" class="hidden">
+
+      <h2>✨ Create Account</h2>
+
+      <p class="modal-description">
+        Your calculation history will be available when you
+        log in on another device.
+      </p>
+
+      <label for="registerEmail">
+        Email
+      </label>
+
+      <input
+        id="registerEmail"
+        type="email"
+        placeholder="you@example.com"
+        autocomplete="email"
+      >
+
+      <label for="registerPassword">
+        Password
+      </label>
+
+      <input
+        id="registerPassword"
+        type="password"
+        placeholder="At least 6 characters"
+        autocomplete="new-password"
+      >
+
+      <label for="registerPassword2">
+        Confirm Password
+      </label>
+
+      <input
+        id="registerPassword2"
+        type="password"
+        placeholder="Repeat password"
+        autocomplete="new-password"
+      >
+
+      <button
+        class="calculate-button"
+        onclick="registerUser()"
+        type="button"
+      >
+        Create Account
+      </button>
+
+      <button
+        class="secondary-button"
+        onclick="showLogin()"
+        type="button"
+      >
+        Back to Login
+      </button>
+
+      <p id="registerMessage" class="account-message"></p>
+
+    </div>
+
+
+    <div id="loggedInPanel" class="hidden">
+
+      <h2>👤 Account</h2>
+
+      <p>
+        Logged in as:
+      </p>
+
+      <strong id="accountEmail"></strong>
+
+      <button
+        class="calculate-button"
+        onclick="closeAccountModal()"
+        type="button"
+      >
+        Continue
+      </button>
+
+      <button
+        class="secondary-button"
+        onclick="logoutUser()"
+        type="button"
+      >
+        Logout
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<header id="home" class="hero">
+
+  <div class="hero-content">
+
+    <div class="badge">
+      🇵🇭 Made for Filipino Students
+    </div>
+
+    <h1>
+      Student tools<br>
+      <span>made simple.</span>
+    </h1>
+
+    <p>
+      Calculate grades, GPA, tuition, study time and more
+      with simple, free tools.
+    </p>
+
+    <a href="#calculators" class="hero-button">
+      Explore Calculators →
+    </a>
+
+  </div>
+
+</header>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main>
+
+
+<!-- =========================
+     CALCULATORS
+========================= -->
+
+<section id="calculators" class="section">
+
+  <div class="section-title">
+
+    <span>TOOLS</span>
+
+    <h2>Student Calculators</h2>
+
+    <p>
+      Choose a calculator below.
+    </p>
+
+  </div>
+
+
+  <!-- SEARCH -->
+
+  <div class="calculator-search">
+
+    <input
+      id="calculatorSearch"
+      type="search"
+      placeholder="🔎 Search calculators..."
+      autocomplete="off"
+    >
+
+    <div
+      id="searchResults"
+      class="search-results"
+    ></div>
+
+  </div>
+
+
+  <div class="calculator-grid">
+
+
+    <!-- FINAL GRADE -->
+
+    <article class="tool-card">
+
+      <div class="tool-icon">
+        🎯
+      </div>
+
+      <h3>
+        Final Grade Calculator
+      </h3>
+
+      <p>
+        Calculate your weighted grade using homework,
+        quizzes, projects, exams and other categories.
+      </p>
+
+      <button
+        onclick="openCalculator('grade')"
+        type="button"
+      >
+        Open Calculator
+      </button>
+
+    </article>
+
+
+    <!-- GPA -->
+
+    <article class="tool-card">
+
+      <div class="tool-icon">
+        📊
+      </div>
+
+      <h3>
+        GPA Calculator
+      </h3>
+
+      <p>
+        Enter your subjects and grades to calculate
+        your overall average.
+      </p>
+
+      <button
+        onclick="openCalculator('gpa')"
+        type="button"
+      >
+        Open Calculator
+      </button>
+
+    </article>
+
+
+    <!-- TUITION -->
+
+    <article class="tool-card">
+
+      <div class="tool-icon">
+        💰
+      </div>
+
+      <h3>
+        Tuition Calculator
+      </h3>
+
+      <p>
+        Estimate your semester, monthly and yearly
+        education expenses.
+      </p>
+
+      <button
+        onclick="openCalculator('tuition')"
+        type="button"
+      >
+        Open Calculator
+      </button>
+
+    </article>
+
+
+    <!-- STUDY -->
+
+    <article class="tool-card">
+
+      <div class="tool-icon">
+        ⏱️
+      </div>
+
+      <h3>
+        Study Hours Calculator
+      </h3>
+
+      <p>
+        Plan your daily, weekly and monthly study time.
+      </p>
+
+      <button
+        onclick="openCalculator('study')"
+        type="button"
+      >
+        Open Calculator
+      </button>
+
+    </article>
+
+
+    <!-- SCIENTIFIC -->
+
+    <article class="tool-card">
+
+      <div class="tool-icon">
+        🧮
+      </div>
+
+      <h3>
+        Scientific Calculator
+      </h3>
+
+      <p>
+        Perform arithmetic, powers, roots, logarithms,
+        trigonometry and more.
+      </p>
+
+      <button
+        onclick="openCalculator('scientific')"
+        type="button"
+      >
+        Open Calculator
+      </button>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     CALCULATOR AREA
+========================= -->
+
+<section
+  id="calculatorArea"
+  class="calculator-section hidden"
+>
+
+  <div class="calculator-box">
+
+    <button
+      class="back-button"
+      onclick="closeCalculator()"
+      type="button"
+    >
+      ← Back to calculators
+    </button>
+
+
+    <!-- =====================
+         FINAL GRADE
+    ====================== -->
+
+    <div
+      id="gradeCalculator"
+      class="calculator-content hidden"
+    >
+
+      <h2>🎯 Final Grade Calculator</h2>
+
+      <p class="calculator-description">
+        Enter the categories used by your teacher.
+        Leave unused categories blank.
+      </p>
+
+      <div class="info-note">
+        💡 Blank categories will not be included.
+      </div>
+
+      <div class="grade-table">
+
+        <div class="grade-header">
+          <span>Category</span>
+          <span>Grade (%)</span>
+          <span>Weight (%)</span>
+        </div>
+
+
+        <div class="grade-row">
+          <label>Homework</label>
+
+          <input
+            id="homeworkGrade"
+            type="number"
+            min="0"
+            max="100"
+            step="0.01"
+            placeholder="N/A"
+          >
+
+          <input
+            id="homeworkWeight"
+            type="number"
+            min="0"
+            max="100"
+            step="0.01"
+            placeholder="Weight"
+          >
+        </div>
+
+
+        <div class="grade-row">
+          <label>Written Works</label>
+
+          <input
+            id="writtenGrade"
+            type="number"
+            min="0"
+            max="100"
+            step="0.01"
+            placeholder="N/A"
+          >
+
+          <input
+            id="writtenWeight"
+            type="number"
+            min="0"
+            max="100"
+            step="0.01"
+            placeholder="Weight"
+          >
+        </div>
+
+
+        <div class="grade-row">
+          <label>Quizzes</label>
+
+          <input
+            id="quizGrade"
+            type="number"
+            min="0"
+            max="100"
+            step="0.01"
+            placeholder="N/A"
+          >
+
+          <input
+            id="quizWeight"
+            type="number"
+            min="0"
+            max="100"
+            step="0.01"
+            placeholder="Weight"
+          >
+        </div>
+
+
+        <div class="grade-row">
+          <label>Projects</label>
+
+          <input
+            id="projectGrade"
+            type="number"
+            min="0"
+            max="100"
+            step="0.01"
+            placeholder="N/A"
+          >
+
+          <input
+            id="projectWeight"
+            type="number"
+            min="0"
+            max="100"
+            step="0.01"
+            placeholder="Weight"
+          >
+        </div>
+
+
+        <div class="grade-row">
+          <label>Participation</label>
+
+          <input
+            id="participationGrade"
+            type="number"
+            min="0"
+            max="100"
+            step="0.01"
+            placeholder="N/A"
+          >
+
+          <input
+            id="participationWeight"
+            type="number"
+            min="0"
+            max="100"
+            step="0.01"
+            placeholder="Weight"
+          >
+        </div>
+
+
+        <div class="grade-row">
+          <label>Sports Credit</label>
+
+          <input
+            id="sportsGrade"
+            type="number"
+            min="0"
+            max="100"
+            step="0.01"
+            placeholder="N/A"
+          >
+
+          <input
+            id="sportsWeight"
+            type="number"
+            min="0"
+            max="100"
+            step="0.01"
+            placeholder="Weight"
+          >
+        </div>
+
+
+        <div class="grade-row extra-credit-row">
+
+          <label>Extra Credit</label>
+
+          <input
+            id="extraCredit"
+            type="number"
+            min="0"
+            max="100"
+            step="0.01"
+            placeholder="Bonus"
+          >
+
+          <span class="extra-credit-label">
+            Bonus points
+          </span>
+
+        </div>
+
+
+        <div class="grade-row final-exam-row">
+
+          <label>Final Exam</label>
+
+          <input
+            id="finalExamGrade"
+            type="number"
+            min="0"
+            max="100"
+            step="0.01"
+            placeholder="N/A"
+          >
+
+          <input
+            id="finalExamWeight"
+            type="number"
+            min="0"
+            max="100"
+            step="0.01"
+            placeholder="Weight"
+          >
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="calculate-button"
+        onclick="calculateAdvancedGrade()"
+        type="button"
+      >
+        Calculate Final Grade
+      </button>
+
+
+      <div class="grade-results">
+
+        <div class="grade-result-card">
+          <span>Current Weighted Grade</span>
+          <strong id="currentWeightedAnswer">N/A</strong>
+        </div>
+
+        <div class="grade-result-card">
+          <span>Final Grade</span>
+          <strong id="finalGradeAnswer">N/A</strong>
+        </div>
+
+        <div class="grade-result-card">
+          <span>Total Weight</span>
+          <strong id="totalWeightAnswer">N/A</strong>
+        </div>
+
+      </div>
+
+      <p id="gradeMessage" class="grade-message"></p>
+
+    </div>
+
+
+    <!-- =====================
+         GPA
+    ====================== -->
+
+    <div
+      id="gpaCalculator"
+      class="calculator-content hidden"
+    >
+
+      <h2>📊 GPA Calculator</h2>
+
+      <p class="calculator-description">
+        Enter each subject and its grade.
+      </p>
+
+      <div id="subjects">
+
+        <div class="gpa-subject-row">
+
+          <input
+            type="text"
+            class="subject-name"
+            placeholder="Subject name"
+          >
+
+          <input
+            type="number"
+            class="subject-grade"
+            placeholder="Grade"
+            min="0"
+            max="100"
+            step="0.01"
+          >
+
+          <button
+            class="remove-subject"
+            onclick="removeSubject(this)"
+            type="button"
+          >
+            ×
+          </button>
+
+        </div>
+
+      </div>
+
+      <button
+        class="secondary-button"
+        onclick="addSubject()"
+        type="button"
+      >
+        + Add Subject
+      </button>
+
+      <button
+        class="calculate-button"
+        onclick="calculateGPA()"
+        type="button"
+      >
+        Calculate GPA
+      </button>
+
+      <div class="result-box">
+
+        <span>Your average</span>
+
+        <strong id="gpaAnswer">
+          N/A
+        </strong>
+
+        <p>average grade</p>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================
+         TUITION
+    ====================== -->
+
+    <div
+      id="tuitionCalculator"
+      class="calculator-content hidden"
+    >
+
+      <h2>💰 Tuition Calculator</h2>
+
+      <p class="calculator-description">
+        Estimate your total education expenses.
+      </p>
+
+      <div class="info-note">
+        💡 Enter your costs for one semester.
+      </div>
+
+      <label>Tuition Fee (₱)</label>
+      <input id="tuition" type="number" min="0" step="0.01">
+
+      <label>Miscellaneous / School Fees (₱)</label>
+      <input id="schoolFees" type="number" min="0" step="0.01">
+
+      <label>Books & Supplies (₱)</label>
+      <input id="books" type="number" min="0" step="0.01">
+
+      <label>Transportation (₱)</label>
+      <input id="transportation" type="number" min="0" step="0.01">
+
+      <label>Food / Allowance (₱)</label>
+      <input id="food" type="number" min="0" step="0.01">
+
+      <label>Dorm / Rent (₱)</label>
+      <input id="housing" type="number" min="0" step="0.01">
+
+      <label>Other Expenses (₱)</label>
+      <input id="otherExpenses" type="number" min="0" step="0.01">
+
+      <label>Semesters per Year</label>
+
+      <input
+        id="semestersPerYear"
+        type="number"
+        min="1"
+        max="4"
+        step="1"
+        value="2"
+      >
+
+      <button
+        class="calculate-button"
+        onclick="calculateTuition()"
+        type="button"
+      >
+        Calculate Expenses
+      </button>
+
+      <div class="expense-results">
+
+        <div class="expense-result">
+          <span>Per Semester</span>
+          <strong id="semesterAnswer">₱0</strong>
+        </div>
+
+        <div class="expense-result">
+          <span>Per Month</span>
+          <strong id="monthlyTuitionAnswer">₱0</strong>
+        </div>
+
+        <div class="expense-result">
+          <span>Per Year</span>
+          <strong id="yearlyTuitionAnswer">₱0</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================
+         STUDY HOURS
+    ====================== -->
+
+    <div
+      id="studyCalculator"
+      class="calculator-content hidden"
+    >
+
+      <h2>⏱️ Study Hours Calculator</h2>
+
+      <p class="calculator-description">
+        See how your study time fits into your schedule.
+      </p>
+
+      <div class="info-note">
+        💡 Calculate daily, weekly and monthly study time.
+      </div>
+
+      <label>Number of Subjects</label>
+
+      <input
+        id="studySubjects"
+        type="number"
+        min="1"
+        max="50"
+        value="5"
+      >
+
+      <label>Study Hours per Subject / Week</label>
+
+      <input
+        id="hoursPerSubject"
+        type="number"
+        min="0"
+        max="168"
+        step="0.5"
+        value="2"
+      >
+
+      <label>Study Days per Week</label>
+
+      <input
+        id="studyDays"
+        type="number"
+        min="1"
+        max="7"
+        value="5"
+      >
+
+      <label>Miscellaneous Hours per Day</label>
+
+      <p class="small-description">
+        Commuting, chores, gaming, social media,
+        entertainment and other activities.
+      </p>
+
+      <input
+        id="miscHours"
+        type="number"
+        min="0"
+        max="24"
+        step="0.5"
+        value="4"
+      >
+
+      <button
+        class="calculate-button"
+        onclick="calculateStudy()"
+        type="button"
+      >
+        Calculate Study Time
+      </button>
+
+      <div class="study-results">
+
+        <h3>📚 Study Time</h3>
+
+        <div class="study-result-row">
+          <span>Per Day</span>
+          <strong id="dailyStudyAnswer">0 hours</strong>
+        </div>
+
+        <div class="study-result-row">
+          <span>Per Week</span>
+          <strong id="weeklyStudyAnswer">0 hours</strong>
+        </div>
+
+        <div class="study-result-row">
+          <span>Per Month</span>
+          <strong id="monthlyStudyAnswer">0 hours</strong>
+        </div>
+
+      </div>
+
+
+      <div class="study-results">
+
+        <h3>🕒 Miscellaneous Time</h3>
+
+        <div class="study-result-row">
+          <span>Per Day</span>
+          <strong id="dailyMiscAnswer">0 hours</strong>
+        </div>
+
+        <div class="study-result-row">
+          <span>Per Week</span>
+          <strong id="weeklyMiscAnswer">0 hours</strong>
+        </div>
+
+        <div class="study-result-row">
+          <span>Per Month</span>
+          <strong id="monthlyMiscAnswer">0 hours</strong>
+        </div>
+
+      </div>
+
+
+      <div class="schedule-box">
+
+        <h3>📅 Daily Schedule</h3>
+
+        <div class="schedule-row">
+          <span>24-hour day</span>
+          <strong>24 hours</strong>
+        </div>
+
+        <div class="schedule-row">
+          <span>Study</span>
+          <strong id="scheduleStudy">0 hours</strong>
+        </div>
+
+        <div class="schedule-row">
+          <span>Miscellaneous</span>
+          <strong id="scheduleMisc">0 hours</strong>
+        </div>
+
+        <div class="schedule-row remaining">
+          <span>Remaining Free Time</span>
+          <strong id="freeTimeAnswer">0 hours</strong>
+        </div>
+
+      </div>
+
+      <p id="studyWarning" class="study-warning"></p>
+
+    </div>
+
+
+    <!-- =====================
+         SCIENTIFIC
+    ====================== -->
+
+    <div
+      id="scientificCalculator"
+      class="calculator-content hidden"
+    >
+
+      <h2>🧮 Scientific Calculator</h2>
+
+      <p class="calculator-description">
+        Basic and scientific calculations.
+      </p>
+
+
+      <div class="scientific-calculator">
+
+        <div class="scientific-display">
+
+          <div id="scientificExpression">
+            0
+          </div>
+
+          <div id="scientificResult">
+            0
+          </div>
+
+        </div>
+
+
+        <div class="angle-toggle">
+
+          <button
+            id="degreeButton"
+            class="angle-active"
+            onclick="setAngleMode('DEG')"
+            type="button"
+          >
+            DEG
+          </button>
+
+          <button
+            id="radianButton"
+            onclick="setAngleMode('RAD')"
+            type="button"
+          >
+            RAD
+          </button>
+
+        </div>
+
+
+        <div class="scientific-buttons">
+
+          <button onclick="scientificClear()">AC</button>
+          <button onclick="scientificDelete()">DEL</button>
+          <button onclick="scientificInput('(')">(</button>
+          <button onclick="scientificInput(')')">)</button>
+          <button onclick="scientificInput('/')">÷</button>
+
+          <button onclick="scientificFunction('sin')">sin</button>
+          <button onclick="scientificFunction('cos')">cos</button>
+          <button onclick="scientificFunction('tan')">tan</button>
+          <button onclick="scientificInput('^')">xʸ</button>
+          <button onclick="scientificInput('*')">×</button>
+
+          <button onclick="scientificFunction('asin')">sin⁻¹</button>
+          <button onclick="scientificFunction('acos')">cos⁻¹</button>
+          <button onclick="scientificFunction('atan')">tan⁻¹</button>
+          <button onclick="scientificInput('sqrt(')">√</button>
+          <button onclick="scientificInput('-')">−</button>
+
+          <button onclick="scientificFunction('log')">log</button>
+          <button onclick="scientificFunction('ln')">ln</button>
+          <button onclick="scientificInput('π')">π</button>
+          <button onclick="scientificInput('e')">e</button>
+          <button onclick="scientificInput('+')">+</button>
+
+          <button onclick="scientificInput('7')">7</button>
+          <button onclick="scientificInput('8')">8</button>
+          <button onclick="scientificInput('9')">9</button>
+          <button onclick="scientificInput('%')">%</button>
+          <button onclick="scientificFunction('factorial')">n!</button>
+
+          <button onclick="scientificInput('4')">4</button>
+          <button onclick="scientificInput('5')">5</button>
+          <button onclick="scientificInput('6')">6</button>
+          <button onclick="scientificInput('**')">x²</button>
+          <button onclick="scientificInput('1')">1</button>
+
+          <button onclick="scientificInput('2')">2</button>
+          <button onclick="scientificInput('3')">3</button>
+          <button onclick="scientificInput('0')">0</button>
+          <button onclick="scientificInput('.')">.</button>
+          <button
+            class="equals-button"
+            onclick="scientificCalculate()"
+          >
+            =
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     HISTORY
+========================= -->
+
+<section id="history" class="history-section">
+
+  <div class="history-container">
+
+    <div class="section-title">
+
+      <span>ACCOUNT</span>
+
+      <h2>Calculation History</h2>
+
+      <p>
+        Your saved calculations appear here when you are logged in.
+      </p>
+
+    </div>
+
+
+    <div id="historyLoginMessage" class="history-login-message">
+
+      <p>
+        🔐 Login to save and view your calculation history
+        across devices.
+      </p>
+
+      <button
+        onclick="openAccountModal()"
+        type="button"
+      >
+        Login / Create Account
+      </button>
+
+    </div>
+
+
+    <div id="historyContent" class="hidden">
+
+      <div class="history-top">
+
+        <span id="historyAccountLabel"></span>
+
+        <button
+          onclick="clearAllHistory()"
+          type="button"
+          class="danger-button"
+        >
+          Clear All History
+        </button>
+
+      </div>
+
+      <div id="historyList"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section id="about" class="about-section">
+
+  <h2>
+    Why StudentTools PH?
+  </h2>
+
+  <p>
+    Simple calculators designed to help Filipino students
+    make school planning easier.
+  </p>
+
+  <div class="features">
+
+    <div>
+      <strong>⚡ Fast</strong>
+      <span>Instant calculations</span>
+    </div>
+
+    <div>
+      <strong>📱 Mobile</strong>
+      <span>Works on phones</span>
+    </div>
+
+    <div>
+      <strong>☁️ Cloud History</strong>
+      <span>Access calculations across devices</span>
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+  <p>
+    © 2026 StudentTools PH
+  </p>
+
+</footer>
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
